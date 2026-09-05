@@ -25,4 +25,16 @@ export class TaskManager {
   getTasks() {
     return [...this.tasks];
   }
+
+  // Métodos modularizados de consulta
+  filterByPriority(priority) {
+    if (!priority || priority === 'all') return this.getTasks();
+    return this.tasks.filter(task => task.priority === priority);
+  }
+
+  searchByTitle(query) {
+    if (!query || !query.trim()) return this.getTasks();
+    const cleanQuery = query.toLowerCase().trim();
+    return this.tasks.filter(task => task.title.toLowerCase().includes(cleanQuery));
+  }
 }

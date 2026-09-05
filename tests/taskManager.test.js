@@ -25,4 +25,12 @@ export function runTests(assert) {
     errorLanzado = true;
   }
   assert(errorLanzado === true, 'Debe lanzar error al intentar crear una tarea con título vacío');
+
+  // Test 4 (Refactor): Filtrado por prioridad y búsqueda
+  manager.addTask('Diseñar base de datos', 'low');
+  const highTasks = manager.filterByPriority('high');
+  assert(highTasks.length === 1, 'Debe encontrar 1 tarea de prioridad high');
+
+  const searchResults = manager.searchByTitle('base de datos');
+  assert(searchResults.length === 1, 'Debe encontrar 1 tarea por coincidencia de texto');
 }
