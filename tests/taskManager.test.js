@@ -16,4 +16,13 @@ export function runTests(assert) {
   const allTasks = manager.getTasks();
   assert(allTasks.length === 1, 'Debe haber exactamente 1 tarea registrada');
   assert(allTasks[0].id === task1.id, 'El ID de la tarea debe coincidir');
+
+  // Test 3 (Fix): Validar rechazo de títulos vacíos
+  let errorLanzado = false;
+  try {
+    manager.addTask('   ');
+  } catch (err) {
+    errorLanzado = true;
+  }
+  assert(errorLanzado === true, 'Debe lanzar error al intentar crear una tarea con título vacío');
 }
